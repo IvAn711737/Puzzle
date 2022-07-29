@@ -7,9 +7,6 @@ import rospy
 from controll.srv import Controll, ControllResponse
 from takeoff_common.takeoffpy import MavController, AutoPilot
 
-safe_zone=4 # Размер стороны квадрата за приделы которого дрон не должен вылетать ВАЖНО!нуливая точка (точка взлёта находится в центре этого квадрата)
-safe_MAXheight=2.5 # Ограничение максимальной высоты подёма в метрах
-safe_MINheight=0.2 # Ограничивает минмальную допустимую высоту
 class TakeoffHandler:
     """Класс для обработки запросов к сервису takeoff"""
 
@@ -26,10 +23,10 @@ class TakeoffHandler:
         """Обрабатывает запрос к сервису takeoff_landing
 
         Args:
-            req (Takeoff): запрос к сервису, содержащий высоту и требование посадки
+            req (catki): запрос к сервису, содержащий высоту и требование посадки
 
         Returns:
-            TakeoffResponse: True - удачно взлет/приземлился, False - нет
+            ControllResponse: True - удачно взлет/приземлился, False - нет
         """
         print(req)
         try:
@@ -57,7 +54,6 @@ def takeoff_landing_server():
     takeoff_srv = rospy.Service('takeoff_landing', Controll, th.handle_takeoff)
     print("Ready to takeoff or land")
     rospy.spin()
-
 
 if __name__ == "__main__":
     takeoff_landing_server()

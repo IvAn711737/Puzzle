@@ -6,7 +6,6 @@ import rospy
 from controll.srv import Controll, ControllResponse
 from takeoff_common.takeoffpy import MavController, AutoPilot
 
-
 class TakeoffHandler:
     """Класс для обработки запросов к сервису takeoff"""
 
@@ -25,7 +24,7 @@ class TakeoffHandler:
             req (Takeoff): запрос к сервису, содержащий высоту и требование посадки
 
         Returns:
-            TakeoffResponse: True - удачно взлет/приземлился, False - нет
+            ControllResponse: True - удачно взлет/приземлился, False - нет
         """
         print(req)
         try:
@@ -44,8 +43,7 @@ class TakeoffHandler:
             return ControllResponse(True)
         except:
             return ControllResponse(False)
-        
-        
+                
 def takeoff_landing_server():
     """Запускает сервер сервиса takeoff_landing """
     rospy.init_node('takeoff_server')
@@ -53,7 +51,6 @@ def takeoff_landing_server():
     takeoff_srv = rospy.Service('takeoff_landing', Controll, th.handle_takeoff)
     print("Ready to takeoff or land")
     rospy.spin()
-
 
 if __name__ == "__main__":
     takeoff_landing_server()

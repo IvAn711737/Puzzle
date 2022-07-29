@@ -10,7 +10,7 @@ message_generation
 
 add_service_files(
   FILES
-  Takeoff1.srv
+  Controll.srv
 )
 
 generate_messages(
@@ -26,6 +26,7 @@ include_directories(
 
 catkin_install_python(PROGRAMS
   scripts/flight_node_test.py
-  scripts/motion_server.py
+  scripts/motion_server_in_doors.py
+  scripts/motion_server_out_doors.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
