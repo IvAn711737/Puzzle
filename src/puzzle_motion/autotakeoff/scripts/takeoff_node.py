@@ -5,7 +5,7 @@ import rospy
 from takeoff_common.takeoffpy import MavController, AutoPilot
 
 if __name__ == "__main__":
-    rospy.init_node("takeoff_node", anonymous=True)sudo systemctl restart docker
+    rospy.init_node("takeoff_node", anonymous=True)
     # Считываем параметры из launch-файла
     altitude = rospy.get_param("~altitude", 0.5)
     autopilot_type = rospy.get_param("~autopilot_type", AutoPilot.ArduPilot)

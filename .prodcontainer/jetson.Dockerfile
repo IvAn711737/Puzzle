@@ -59,10 +59,24 @@ WORKDIR /tmp
 RUN chmod +x build_librealsense.sh
 RUN ./build_librealsense.sh
 
+RUN pip install transforms3d
+
 # Cloning and installing GeographicalLib install 
 RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh -P /tmp
 RUN chmod +x install_geographiclib_datasets.sh
 RUN ./install_geographiclib_datasets.sh
+
+# check which command script is available
+if hash geographiclib-get-geoids; then
+	run_get geoids geoids egm96-5
+	run_get gravity gravity egm96
+	run_get magnetic magnetic emm2015
+elif hash geographiclib-datasets-download; then # only allows install the goid model dataset
+	geographiclib-datasets-download egm96_5;
+else
+	echo "OS not supported! Check GeographicLib page for supported OS and lib versions." 1>&2
+fi
+
 
 # installing tools for ros
 RUN apt-get update && \

@@ -1,21 +1,27 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(controll)
+project(fast_planner_server)
 
 find_package(catkin REQUIRED COMPONENTS
-geometry_msgs
-mavros_msgs
-rospy
-message_generation
+  rospy
+  std_msgs
+  geometry_msgs
+  genmsg
+  actionlib
+  actionlib_msgs
 )
 
-add_service_files(
+add_action_files(
+  DIRECTORY
+  action
   FILES
-  Controll.srv
+  FastPlanner.action
 )
 
 generate_messages(
   DEPENDENCIES
   std_msgs
+  geometry_msgs
+  actionlib_msgs
 )
 
 catkin_package()
@@ -25,7 +31,7 @@ include_directories(
 )
 
 catkin_install_python(PROGRAMS
-  scripts/flight_node_test.py
-  scripts/motion_server.py
+  scripts/fast_planner_server_node.py
+  scripts/fast_planner_client_node.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
