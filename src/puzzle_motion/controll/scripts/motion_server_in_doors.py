@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import rospy
+import time
 
 from controll.srv import Controll, ControllResponse
 from takeoff_common.takeoffpy import MavController, AutoPilot
@@ -17,6 +18,7 @@ class TakeoffHandler:
         self.safe_zone=3 # Размер стороны квадрата в метрах за приделы которого дрон не должен вылетать ВАЖНО!нуливая точка (точка взлёта находится в центре этого квадрата)
         self.safe_max_height=1.5 # Ограничение максимальной высоты подёма в метрах
         self.safe_min_height=0.2 # Ограничивает минмальную допустимую высоту в метрах
+
     def handle_takeoff(self, req):
         """Обрабатывает запрос к сервису takeoff_landing
 
@@ -39,18 +41,21 @@ class TakeoffHandler:
                 self.drone.go2point(x=req.x, y=req.y, z=req.z, tolerance=0.1)
                 
             else:
+                 tic = time.perf_counter()
                  self.drone.go2point(x=req.x, y=req.y, z=req.z, tolerance=0.1)
+                 toc = time.perf_counter()
+                 print(f"Перемещение заняло {toc - tic:0.4f} секунд")
             return ControllResponse(True)
         except:
             return ControllResponse(False)
                 
-def takeoff_landing_server():
-    """Запускает сервер сервиса takeoff_landing """
-    rospy.init_node('takeoff_server')
+def flight_control_server():
+    """Запускает сервер сервиса flight control """
+    rospy.init_node('flight control')
     th = TakeoffHandler()
-    takeoff_srv = rospy.Service('takeoff_landing', Controll, th.handle_takeoff)
+    takeoff_srv = rospy.Service('flight_control', Controll, th.handle_takeoff)
     print("Ready to takeoff or land")
     rospy.spin()
 
 if __name__ == "__main__":
-    takeoff_landing_server()
+    flight_control_server()

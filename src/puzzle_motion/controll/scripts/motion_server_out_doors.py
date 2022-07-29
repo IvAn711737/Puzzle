@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import rospy
+import time
 
 # from controll.srv import Takeoff, Response
 from controll.srv import Controll, ControllResponse
@@ -38,22 +39,25 @@ class TakeoffHandler:
             elif self.is_takeoff==False:
                 self.is_takeoff=True
                 self.drone.takeoff(req.z)
-                self.drone.go2point(x=req.x, y=req.y, z=req.z, tolerance=0.1)
+                self.drone.go2point(x=req.x, y=req.y, z=req.z, tolerance=0.3)
                 
             else:
-                 self.drone.go2point(x=req.x, y=req.y, z=req.z, tolerance=0.1)
+                 tic = time.perf_counter()
+                 self.drone.go2point(x=req.x, y=req.y, z=req.z, tolerance=0.3)
+                 toc = time.perf_counter()
+                 print(f"Перемещение заняло {toc - tic:0.4f} секунд")
             return ControllResponse(True)
         except:
             return ControllResponse(False)
         
         
-def takeoff_landing_server():
-    """Запускает сервер сервиса takeoff_landing """
-    rospy.init_node('takeoff_server')
+def flight_control_server():
+    """Запускает сервер сервиса flight_control """
+    rospy.init_node('flight_control')
     th = TakeoffHandler()
-    takeoff_srv = rospy.Service('takeoff_landing', Controll, th.handle_takeoff)
+    takeoff_srv = rospy.Service('flight_control', Controll, th.handle_takeoff)
     print("Ready to takeoff or land")
     rospy.spin()
 
 if __name__ == "__main__":
-    takeoff_landing_server()
+    flight_control_server()
