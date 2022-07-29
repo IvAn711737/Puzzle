@@ -38,7 +38,8 @@ RUN apt update \
     && apt install librealsense2-utils -y \
     && apt install librealsense2-dev -y \
     && apt install ros-noetic-aruco-ros -y
-RUN pip3 install pyqtgraph
+RUN pip3 install pyqtgraph    
+RUN pip install transforms3d
 
 RUN echo "parse_git_branch() {" >> /home/${USER_NAME}/.bashrc \
     && echo "    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\\\1)/'" >> /home/${USER_NAME}/.bashrc \

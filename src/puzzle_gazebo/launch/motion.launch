@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="world_name" default="$(find puzzle_gazebo)/worlds/puzzle_sphere_red_ball.world" />
+  <arg name="verbose"    default="false" />
+  <arg name="gui"        default="true" />
+  <arg name="model"      default="iris_puzzle" />
+
+  <!-- puzzle sitl env variables -->
+  <env name="GAZEBO_MODEL_PATH"  value="$(optenv GAZEBO_MODEL_PATH):$(find puzzle_gazebo)/models:$(find px4)/Tools/sitl_gazebo/models" />
+  <env name="GAZEBO_PLUGIN_PATH" value="$(optenv GAZEBO_PLUGIN_PATH):$(find puzzle_gazebo)/plugins/build:$(find px4)/build/px4_sitl_default/build_gazebo" />
+  <env name="LD_LIBRARY_PATH"    value="$(optenv LD_LIBRARY_PATH):$(find px4)/build/px4_sitl_default/build_gazebo" />
+  
+
+  <remap from="/iris_puzzle0/camera/depth/image_raw" to="/camera/aligned_depth_to_color/image_raw" />
+  <remap from="/iris_puzzle0/camera/rgb/image_raw"   to="/camera/color/image_raw" />
+  <remap from="/iris_puzzle0/camera/rgb/camera_info" to="/camera/color/camera_info" />
+  <remap from="/iris_puzzle0/mavros/setpoint_position/local" to="/mavros/setpoint_position/local" />
+  <remap from= "/iris_puzzle0/mavros/setpoint_raw/local" to="/mavros/setpoint_raw/local" />
+  <remap from="/iris_puzzle0/mavros/cmd/arming" to="/mavros/cmd/arming" />
+  <remap from= "/iris_puzzle0/mavros/set_mode" to="/mavros/set_mode" />
+  <remap from="/iris_puzzle0/mavros/cmd/takeoff" to="/mavros/cmd/takeoff" />
+  <remap from= "/iris_puzzle0/mavros/cmd/land" to="/mavros/cmd/land" /> 
+  <remap from="/iris_puzzle0/mavros/setpoint_position/local" to="/mavros/setpoint_position/local" />
+  <remap from= "/iris_puzzle0/mavros/setpoint_raw/local" to="/mavros/setpoint_raw/local" /> 
+  <remap from= "/iris_puzzle0/mavros/local_position/pose" to="/mavros/local_position/pose" /> 
+  <remap from= "/iris_puzzle0/mavros/state" to="/mavros/state" /> 
+
+  <!-- gazebo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)" />
+    <arg name="verbose"    value="$(arg verbose)" />
+    <arg name="gui"        value="$(arg gui)" />
+    <arg name="physics"    value="ode" />
+  </include>
+
+  <!-- mavros -->
+  <!-- start id must be equivals 0 -->
+  <arg name="ID" value="0" />
+  <group ns="$(arg model)$(arg ID)">
+    <!-- iris -->
+    <include file="$(find puzzle_gazebo)/launch/single_uav_spawn.launch">
+      <arg name="model" value="$(arg model)" />
+      <arg name="ID"    value="$(arg ID)" />
+      <arg name="x"     value="5" />
+      <arg name="y"     value="0" />
+      <arg name="z"     value=".2" />
+      <arg name="Y"     value="3.14" />
+    </include>
+
+    <arg name="fcu_url" default="udp://:14540@localhost:14580" />
+    <include file="$(find mavros)/launch/px4.launch">
+      <arg name="fcu_url"       value="$(arg fcu_url)" />
+      <arg name="gcs_url"       value="" />
+      <arg name="tgt_system"    value="$(eval 1 + arg('ID'))" />
+      <arg name="tgt_component" value="1" />
+    </include>
+  </group>
+
+  <include file="$(find puzzle_gazebo)/launch/static_tf.launch" />
+  <include file="$(find puzzle_transform)/launch/launcher.launch" />
+  <include file="$(find puzzle_drone_marker)/launch/launcher.launch" />
+</launch>
