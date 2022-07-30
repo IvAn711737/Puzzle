@@ -10,6 +10,12 @@
     <arg name="use_vision_odometry" default="0" />
     <!-- Время удержания позиции в секундах: целое положительное число -->
     <!-- <arg name="hover_time" default="60" /> -->
+    <arg name="radius" default="5" />
+    <!-- Радиус окружности по которой будет летать дрон в метрах -->
+    <arg name="divider" default="10" />
+    <!-- Чтсло точек на которое будет разбита окружность -->
+    
+
 
     <node name="$(anon flight_node_test)" pkg="controll" type="flight_node_test.py" output="screen">
         <param name="altitude" value="$(arg altitude)" />

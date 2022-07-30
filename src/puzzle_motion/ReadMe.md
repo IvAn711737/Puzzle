@@ -19,10 +19,6 @@
 
 **motion_controller** - пакет, предоставляющий ROS-сервисы для управления движением дрона.  
 
-**fast_planner_server** - ActionServer для fast-planner'а.  
-
-[**fuel**](https://github.com/HKUST-Aerial-Robotics/FUEL) - пакет автономного исследования пространства с использованием fast-planner для навигации.  
-
 **hkust_switcher** - пакет для переключения **fuel** между режимами исследования и навигации.  
 
 **flight_tests** - пакет для тестирования качества отработки различных полетных ситуаций:  

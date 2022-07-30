@@ -14,6 +14,10 @@ include_directories(
 )
 
 catkin_install_python(PROGRAMS
-  # scripts/
+  scripts/flight_through_points_test.py
+  scripts/position_hold_test.py
+  scripts/rotate_angle_test.py
+  scripts/spin_laps_test.py
+  scripts/takeoff_test.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

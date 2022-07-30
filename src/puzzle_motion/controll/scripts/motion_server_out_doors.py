@@ -4,7 +4,6 @@
 import rospy
 import time
 
-# from controll.srv import Takeoff, Response
 from controll.srv import Controll, ControllResponse
 from takeoff_common.takeoffpy import MavController, AutoPilot
 
@@ -16,9 +15,9 @@ class TakeoffHandler:
         use_vision_odometry = rospy.get_param("~use_vision_odometry", False)
         self.drone = MavController.create_controller(ap_type, use_vision_odometry=use_vision_odometry)
         self.is_takeoff=False
-        self.safe_zone=4 # Размер стороны квадрата в метрах за приделы которого дрон не должен вылетать ВАЖНО!нуливая точка (точка взлёта находится в центре этого квадрата)
-        self.safe_max_height=2.5 # Ограничение максимальной высоты подёма в метрах
-        self.safe_min_height=0.2 # Ограничивает минмальную допустимую высоту в метрах
+        self.safe_zone=4            # Размер стороны квадрата в метрах за приделы которого дрон не должен вылетать ВАЖНО!нуливая точка (точка взлёта находится в центре этого квадрата)
+        self.safe_max_height=2.5    # Ограничение максимальной высоты подёма в метрах
+        self.safe_min_height=0.2    # Ограничивает минмальную допустимую высоту в метрах
 
     def handle_takeoff(self, req):
         """Обрабатывает запрос к сервису takeoff_landing

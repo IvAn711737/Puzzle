@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.0.2)
 project(controll)
 
 find_package(catkin REQUIRED COMPONENTS
-geometry_msgs
-mavros_msgs
-rospy
-message_generation
+  geometry_msgs
+  mavros_msgs
+  rospy
+  message_generation
 )
 
 add_service_files(

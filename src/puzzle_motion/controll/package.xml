@@ -3,8 +3,7 @@
     <name>controll</name>
     <version>0.0.0</version>
     <description>The flight_tests package</description>
-    <maintainer email="tamerlan.baxov@mail.ru">Tamerlan Bahov</maintainer>
-    <maintainer email="kirill.pogartsev@ya.ru">Kirill Pogartsev</maintainer>
+    <maintainer email="a.abalian2012@yandex.ru">Ivan Abalyan</maintainer>
     <license>TODO</license>
 
     <buildtool_depend>catkin</buildtool_depend>
