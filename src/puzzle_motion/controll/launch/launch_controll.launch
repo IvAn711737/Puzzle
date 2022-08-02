@@ -12,7 +12,7 @@
     <!-- <arg name="hover_time" default="60" /> -->
     <arg name="radius" default="5" />
     <!-- Радиус окружности по которой будет летать дрон в метрах -->
-    <arg name="divider" default="10" />
+    <arg name="divider" default="30" />
     <!-- Чтсло точек на которое будет разбита окружность -->
     
 
@@ -21,6 +21,9 @@
         <param name="altitude" value="$(arg altitude)" />
         <param name="autopilot_type" value="$(arg ap_type)" type="bool"/>
         <param name="use_vision_odometry" value="$(arg use_vision_odometry)" type="bool"/>
+        <param name="radius" value="$(arg radius)" type="int"/>
+        <param name="divider" value="$(arg divider)" type="int"/>
+
         <!-- <param name="hover_time" value="$(arg hover_time)"/> -->
     </node>
 </launch>

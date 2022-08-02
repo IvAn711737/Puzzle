@@ -23,8 +23,8 @@ if __name__ == "__main__":
     altitude = rospy.get_param("~altitude", 0.5)
     autopilot_type = rospy.get_param("~autopilot_type", AutoPilot.PX4)
     use_vision_odometry = rospy.get_param("~use_vision_odometry", False)
-    radius=rospy.get_param("radius", 5)
-    divider=rospy.get_param("divider", 10)  
+    radius=rospy.get_param("~radius", 5)
+    divider=rospy.get_param("~divider", 10)  
     poses=creating_position(radius, divider)
     # Создаем объект дрона и запускаем его в воздух
     drone = MavController.create_controller(autopilot_type, use_vision_odometry=use_vision_odometry)

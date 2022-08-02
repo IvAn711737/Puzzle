@@ -9,21 +9,20 @@
   <env name="GAZEBO_MODEL_PATH"  value="$(optenv GAZEBO_MODEL_PATH):$(find puzzle_gazebo)/models:$(find px4)/Tools/sitl_gazebo/models" />
   <env name="GAZEBO_PLUGIN_PATH" value="$(optenv GAZEBO_PLUGIN_PATH):$(find puzzle_gazebo)/plugins/build:$(find px4)/build/px4_sitl_default/build_gazebo" />
   <env name="LD_LIBRARY_PATH"    value="$(optenv LD_LIBRARY_PATH):$(find px4)/build/px4_sitl_default/build_gazebo" />
-  
 
-  <remap from="/iris_puzzle0/camera/depth/image_raw" to="/camera/aligned_depth_to_color/image_raw" />
-  <remap from="/iris_puzzle0/camera/rgb/image_raw"   to="/camera/color/image_raw" />
-  <remap from="/iris_puzzle0/camera/rgb/camera_info" to="/camera/color/camera_info" />
+  <remap from="/iris_puzzle0/camera/depth/image_raw"         to="/camera_d435i/aligned_depth_to_color/image_raw" />
+  <remap from="/iris_puzzle0/camera/rgb/image_raw"           to="/camera_d435i/color/image_raw" />
+  <remap from="/iris_puzzle0/camera/rgb/camera_info"         to="/camera_d435i/color/camera_info" />
   <remap from="/iris_puzzle0/mavros/setpoint_position/local" to="/mavros/setpoint_position/local" />
-  <remap from= "/iris_puzzle0/mavros/setpoint_raw/local" to="/mavros/setpoint_raw/local" />
-  <remap from="/iris_puzzle0/mavros/cmd/arming" to="/mavros/cmd/arming" />
-  <remap from= "/iris_puzzle0/mavros/set_mode" to="/mavros/set_mode" />
-  <remap from="/iris_puzzle0/mavros/cmd/takeoff" to="/mavros/cmd/takeoff" />
-  <remap from= "/iris_puzzle0/mavros/cmd/land" to="/mavros/cmd/land" /> 
+  <remap from="/iris_puzzle0/mavros/setpoint_raw/local"      to="/mavros/setpoint_raw/local" />
+  <remap from="/iris_puzzle0/mavros/cmd/arming"              to="/mavros/cmd/arming" />
+  <remap from="/iris_puzzle0/mavros/set_mode"                to="/mavros/set_mode" />
+  <remap from="/iris_puzzle0/mavros/cmd/takeoff"             to="/mavros/cmd/takeoff" />
+  <remap from="/iris_puzzle0/mavros/cmd/land"                to="/mavros/cmd/land" /> 
   <remap from="/iris_puzzle0/mavros/setpoint_position/local" to="/mavros/setpoint_position/local" />
-  <remap from= "/iris_puzzle0/mavros/setpoint_raw/local" to="/mavros/setpoint_raw/local" /> 
-  <remap from= "/iris_puzzle0/mavros/local_position/pose" to="/mavros/local_position/pose" /> 
-  <remap from= "/iris_puzzle0/mavros/state" to="/mavros/state" /> 
+  <remap from="/iris_puzzle0/mavros/setpoint_raw/local"      to="/mavros/setpoint_raw/local" /> 
+  <remap from="/iris_puzzle0/mavros/local_position/pose"     to="/mavros/local_position/pose" /> 
+  <remap from="/iris_puzzle0/mavros/state"                   to="/mavros/state" /> 
 
   <!-- gazebo -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -56,7 +55,10 @@
     </include>
   </group>
 
+  <include file="$(find puzzle_transform)/launch/launcher.launch"> 
+    <arg name="drone_name" value="$(arg model)$(arg ID)"/>
+  </include>
+
   <include file="$(find puzzle_gazebo)/launch/static_tf.launch" />
-  <include file="$(find puzzle_transform)/launch/launcher.launch" />
   <include file="$(find puzzle_drone_marker)/launch/launcher.launch" />
 </launch>

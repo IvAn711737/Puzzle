@@ -34,7 +34,7 @@ class TakeoffHandler:
                 self.drone.land()
                 self.is_takeoff=False
             elif abs(req.x)>self.safe_zone/2 or abs(req.y)>self.safe_zone/2 or req.z>self.safe_max_height or req.z<self.safe_min_height:
-                print ("выход за приделы безопастной зоны")
+                rospy.logerr("выход за приделы безопастной зоны команда отклонена")
             elif self.is_takeoff==False:
                 self.is_takeoff=True
                 self.drone.takeoff(req.z)
@@ -44,7 +44,8 @@ class TakeoffHandler:
                  tic = time.perf_counter()
                  self.drone.go2point(x=req.x, y=req.y, z=req.z, tolerance=0.3)
                  toc = time.perf_counter()
-                 print(f"Перемещение заняло {toc - tic:0.4f} секунд")
+                 time_fly=toc - tic
+                 rospy.loginfo(" Перемещение занялоe %f секунд", time_fly)
             return ControllResponse(True)
         except:
             return ControllResponse(False)
