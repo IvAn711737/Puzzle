@@ -32,10 +32,11 @@ if __name__ == "__main__":
         drone.takeoff(height=altitude)
         drone.follow_trajectory(poses, altitude, tolerance=0.7)
         rate = rospy.Rate(10) # 10hz
-        while not rospy.is_shutdown():
-            drone.send_pos(0, 0, 5, 6)
-            rate.sleep()
+        drone.send_pos(0, 0, altitude)
         drone.land()
         
     except Exception as e:
         rospy.logerr(e)
+        drone.land()
+    else:
+        drone.land()

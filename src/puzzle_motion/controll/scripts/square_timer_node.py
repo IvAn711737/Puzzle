@@ -7,8 +7,6 @@ import time
 from takeoff_common.takeoffpy import MavController, AutoPilot
 from re import X
 import numpy as np
-R=4 # Радиус окружности по которой будет летать дрон
-Divider=4 # Чтсло точек на которое будет разбита окружность 
 takeof_flag=0
 
 poses=[[0, 0], [0.5, 0.5], [-0.5, 0.5], [-0.5, -0.5], [0.5, -0.5], [0, 0]]
@@ -31,4 +29,5 @@ if __name__ == "__main__":
                 rospy.loginfo(f"Перемещение из точки {poses[i-1] [0], poses[i-1] [1] } в точку {poses[i] [0], poses[i] [1]}  заняло {toc - tic:0.4f} секунд")
         except Exception as e:
             rospy.logerr(e)
+            drone.land()
     drone.land()

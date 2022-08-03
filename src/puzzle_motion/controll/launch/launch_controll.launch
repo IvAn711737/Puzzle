@@ -15,16 +15,12 @@
     <arg name="divider" default="30" />
     <!-- Чтсло точек на которое будет разбита окружность -->
     
-
-
     <node name="$(anon flight_node_test)" pkg="controll" type="flight_node_test.py" output="screen">
         <param name="altitude" value="$(arg altitude)" />
         <param name="autopilot_type" value="$(arg ap_type)" type="bool"/>
         <param name="use_vision_odometry" value="$(arg use_vision_odometry)" type="bool"/>
         <param name="radius" value="$(arg radius)" type="int"/>
         <param name="divider" value="$(arg divider)" type="int"/>
-
-        <!-- <param name="hover_time" value="$(arg hover_time)"/> -->
     </node>
 </launch>
     
