@@ -34,9 +34,9 @@
 		"-v",
 		"/tmp/.X11-unix:/tmp/.X11-unix:rw",
 		"-v",
-		"/dev:/dev:ro",
-		"-v",
-		"/home/${localEnv:USER}/.gitconfig:/etc/gitconfig"
+		"/dev:/dev:ro"
+		// "-v",
+		// "/home/${localEnv:USER}/.gitconfig:/etc/gitconfig"
 	],
 	"workspaceFolder": "/workspaces/Puzzle",
 	"containerEnv": {
