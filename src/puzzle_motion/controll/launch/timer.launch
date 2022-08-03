@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <node name="$(anon timer_node)" pkg="controll" type="timer_node.py" output="screen">
-      </node>
-</launch>
