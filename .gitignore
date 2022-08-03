@@ -11,3 +11,4 @@ src/PxSitl/TMP/
 tmp/
 opencv/
 DockerfileWork
+src/puzzle_motion/takeoff_common/src/takeoff_common/__pycache__/
