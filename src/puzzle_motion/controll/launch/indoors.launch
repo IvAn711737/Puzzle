@@ -5,9 +5,9 @@
     <!-- 1 - ArduPilot -->
     <arg name="safe_zone" default="2" />
     <!-- Сторона квадрата безопастной зоны -->
-    <arg name="safe_max_height" default="1.6" />
+    <arg name="safe_max_height" default="0,8" />
     <!-- Максимальная высота  безопастного полёта -->
-    <arg name="safe_min_height" default="0.2" />
+    <arg name="safe_min_height" default="0.1" />
     <!-- Минимальная высота  безопастного полёта -->
     <arg name="tolerance" default="0.2" />
     <!-- Растояние на котором точка будет считать с достигнутой -->

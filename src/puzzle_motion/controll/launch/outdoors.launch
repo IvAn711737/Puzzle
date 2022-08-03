@@ -5,7 +5,7 @@
     <!-- 1 - ArduPilot -->
     <arg name="safe_zone" default="4" />
     <!-- Сторона квадрата безопастной зоны -->
-    <arg name="safe_max_height" default="2.5" />
+    <arg name="safe_max_height" default="1" />
     <!-- Максимальная высота  безопастного полёта -->
     <arg name="safe_min_height" default="0.2" />
     <!-- Минимальная высота  безопастного полёта -->

@@ -12,7 +12,7 @@
 
     <node name="$(anon square_timer_node)" pkg="controll" type="square_timer_node.py" output="screen">
         <param name="altitude" value="$(arg altitude)" />
-        <param name="autopilot_type" value="$(arg ap_type)" type="bool"/>
+        <param name="autopilot_type" value="$(arg ap_type)"/>
         <param name="use_vision_odometry" value="$(arg use_vision_odometry)" type="bool"/>
         <param name="tolerance" value="$(arg tolerance)" />
     </node>
