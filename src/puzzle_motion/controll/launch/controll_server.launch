@@ -3,7 +3,7 @@
 <!-- Тип автопилота -->
     <!-- 0 - PX4 -->
     <!-- 1 - ArduPilot -->
-    <arg name="safe_zone" default="2" />
+    <arg name="safe_zone"       default="2" />
     <!-- Сторона квадрата безопастной зоны -->
     <arg name="safe_max_height" default="0.8" />
     <!-- Максимальная высота  безопастного полёта -->
@@ -11,7 +11,7 @@
     <!-- Минимальная высота  безопастного полёта -->
 
     <node name="$(anon motion_server)" pkg="controll" type="motion_server.py" output="screen">
-        <param name="safe_zone" value="$(arg safe_zone)" />
+        <param name="safe_zone"       value="$(arg safe_zone)" />
         <param name="safe_max_height" value="$(arg safe_max_height)" />
         <param name="safe_min_height" value="$(arg safe_min_height)" />
     </node>

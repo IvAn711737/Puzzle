@@ -3,17 +3,17 @@
 <!-- Тип автопилота -->
     <!-- 0 - PX4 -->
     <!-- 1 - ArduPilot -->
-    <arg name="ap_type" default="0" />
+    <arg name="ap_type"             default="0" />
     <!-- Высота взлета над землей в метрах -->
-    <arg name="altitude" default="0.8" />
+    <arg name="altitude"            default="0.8" />
     <!-- Использовать визуальную одометрию или нет -->
     <arg name="use_vision_odometry" default="0" />
-    <arg name="tolerance" default="0.1s" />
+    <arg name="tolerance"           default="0.1" />
 
     <node name="$(anon square_timer_node)" pkg="controll" type="square_timer_node.py" output="screen">
-        <param name="altitude" value="$(arg altitude)" />
-        <param name="autopilot_type" value="$(arg ap_type)"/>
+        <param name="altitude"            value="$(arg altitude)" />
+        <param name="autopilot_type"      value="$(arg ap_type)"/>
         <param name="use_vision_odometry" value="$(arg use_vision_odometry)" type="bool"/>
-        <param name="tolerance" value="$(arg tolerance)" />
+        <param name="tolerance"           value="$(arg tolerance)" />
     </node>
 </launch>
